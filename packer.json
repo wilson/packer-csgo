@@ -24,7 +24,7 @@
       "owners": ["099720109477"],
       "most_recent": true
     },
-    "instance_type": "c5.xlarge",
+    "instance_type": "c5.large",
     "ebs_optimized": true,
     "ssh_username": "ubuntu",
     "ssh_interface": "public_ip",
