@@ -1,7 +1,8 @@
 {
   "variables": {
     "steam_token": "{{env `STEAM_TOKEN`}}",
-    "rcon_password": "{{env `RCON_PASSWORD`}}"
+    "rcon_password": "{{env `RCON_PASSWORD`}}",
+    "subnet_name": "public-2a"
   },
   "builders": [{
     "profile": "default",
@@ -9,7 +10,7 @@
     "region": "us-east-2",
     "subnet_filter": {
       "filters": {
-        "tag:Name": "public-2a"
+        "tag:Name": "{{user `subnet_name`}}"
       },
       "most_free": true,
       "random": false
@@ -23,7 +24,7 @@
       "owners": ["099720109477"],
       "most_recent": true
     },
-    "instance_type": "c5d.xlarge",
+    "instance_type": "c5.xlarge",
     "ebs_optimized": true,
     "ssh_username": "ubuntu",
     "ssh_interface": "public_ip",
@@ -31,16 +32,10 @@
     "launch_block_device_mappings": [
       {
         "device_name": "/dev/sda1",
-        "volume_size": 20,
+        "volume_size": 80,
         "volume_type": "gp2",
         "encrypted": true,
         "delete_on_termination": true
-      }
-    ],
-    "ami_block_device_mappings": [
-      {
-        "device_name": "/dev/sdb",
-        "virtual_name": "ephemeral0"
       }
     ],
     "tags": {
@@ -51,6 +46,11 @@
     }
   }],
   "provisioners": [
+    {
+      "type": "file",
+      "source": "./files/steam_bootstrap.sh",
+      "destination": "/tmp/"
+    },
     {
       "type": "shell",
       "inline": [
@@ -63,11 +63,6 @@
       ]
     },
     {
-      "type": "file",
-      "source": "./files/steam_bootstrap.sh",
-      "destination": "/tmp/"
-    },
-    {
       "type": "shell",
       "environment_vars": [
         "STEAM_TOKEN={{user `steam_token`}}",
@@ -77,9 +72,9 @@
         "sudo mv /tmp/steam_bootstrap.sh /root/",
         "sudo mkdir -p /steam",
         "sudo useradd -m steam",
-        "echo '/dev/nvme1n1 /steam ext4 defaults,nofail,discard 0 2' | sudo tee --append /etc/fstab"
+        "sudo chown steam /steam",
+        "sudo -E /root/steam_bootstrap.sh"
       ]
     }
-
   ]
 }

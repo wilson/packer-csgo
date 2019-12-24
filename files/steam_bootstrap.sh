@@ -11,12 +11,6 @@ if [ -z "${RCON_PASSWORD}" ]; then
   exit 1
 fi
 
-if ! lsblk --noheadings --output FSTYPE /dev/nvme1n1 | grep -q 'ext4'; then
-  mkfs.ext4 -E nodiscard /dev/nvme1n1
-  mount /steam
-  chown steam /steam
-fi
-
 su steam -c \
      "mkdir -p /steam/cmd \
      && cd /steam/cmd \
