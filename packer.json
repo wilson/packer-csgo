@@ -42,25 +42,26 @@
       "OS_Version": "Ubuntu",
       "Release": "18.04",
       "Base_AMI_Name": "{{ .SourceAMIName }}",
-      "Game": "CS:GO"
+      "Game": "CS:GO",
+      "Name": "cs-go"
     }
   }],
   "provisioners": [
-    {
-      "type": "file",
-      "source": "./files/steam_bootstrap.sh",
-      "destination": "/tmp/"
-    },
     {
       "type": "shell",
       "inline": [
         "export DEBIAN_FRONTEND=noninteractive",
         "sudo -E apt-get update",
-        "sudo -E apt-get dist-upgrade -y",
         "sudo -E apt-get install -y --no-install-recommends --no-install-suggests screen lib32stdc++6 lib32gcc1 wget ca-certificates",
+        "sudo -E apt-get dist-upgrade -y",
         "sudo -E apt-get clean autoclean",
         "sudo -E apt-get autoremove -y"
       ]
+    },
+    {
+      "type": "file",
+      "source": "./files/steam_bootstrap.sh",
+      "destination": "/tmp/"
     },
     {
       "type": "shell",
@@ -71,9 +72,21 @@
       "inline": [
         "sudo mv /tmp/steam_bootstrap.sh /root/",
         "sudo mkdir -p /steam",
-        "sudo useradd -m steam",
+        "sudo useradd --shell /bin/bash --create-home steam",
         "sudo chown steam /steam",
         "sudo -E /root/steam_bootstrap.sh"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "./files/cfg",
+      "destination": "/tmp/"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo mv /tmp/cfg/* /steam/csgo-dedicated/csgo/cfg/",
+        "sudo chown steam /steam/csgo-dedicated/csgo/cfg/*"
       ]
     }
   ]
