@@ -36,8 +36,8 @@ su steam -c "{ \
      echo '/steam/csgo-dedicated/srcds_run -game csgo -console -autoupdate \
        -steam_dir /steam/cmd/ -steamcmd_script /steam/csgo-dedicated/csgo_update.txt \
        -usercon +fps_max 300 -tickrate 128 -port 27015 -tv_port 27020 -net_port_try 1 \
-       -maxplayers_override 20 +game_type 0 +game_mode 1 +mapgroup mg_active \
-       +map de_dust2 +hostname \"CS:GO 2v2\" \
+       -maxplayers_override 20 +game_type 0 +game_mode 2  \
+       +map de_shortnuke +hostname \"CS:GO 2v2\" +exec scrim16 \
        +sv_setsteamaccount ${STEAM_TOKEN} \
        +rcon_password ${RCON_PASSWORD} +sv_region 0'; \
 } > /steam/csgo-dedicated/start.sh"
