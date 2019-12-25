@@ -11,7 +11,7 @@
                     "maxplayers" "20"
                     "mapgroupsMP"
                     {
-                        "mg_custom" ""
+                        "custom" ""
                     }
                 }
             }
@@ -19,20 +19,16 @@
     }
     "mapgroups"
     {
-        "mg_custom"
+        "custom"
         {
-            "name" "mg_custom"
+            "name" "custom"
             "maps"
             {
-                "cs_office" "0"
-                "de_cbble" "1"
-                "de_dust2" "2"
-                "de_inferno" "3"
-                "de_shortdust" "4"
-                "de_shortnuke" "5"
-                "de_train" "6"
-                "gd_rialto" "7"
-                "de_safehouse" "8"
+                "de_safehouse" "0"
+                "de_shortdust" "1"
+                "de_shortnuke" "2"
+                "de_train" "3"
+                "gd_rialto" "4"
             }
         }
     }
