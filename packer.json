@@ -85,10 +85,17 @@
       "destination": "/tmp/"
     },
     {
+      "type": "file",
+      "source": "./files/gamemodes_server.txt",
+      "destination": "/tmp/"
+    },
+    {
       "type": "shell",
       "inline": [
         "sudo mv /tmp/cfg/* /steam/csgo-dedicated/csgo/cfg/",
-        "sudo chown steam /steam/csgo-dedicated/csgo/cfg/*"
+        "sudo chown steam /steam/csgo-dedicated/csgo/cfg/*",
+        "sudo mv /tmp/gamemodes_server.txt /steam/csgo-dedicated/csgo/",
+        "sudo chown steam /steam/csgo-dedicated/csgo/gamemodes_server.txt"
       ]
     }
   ]

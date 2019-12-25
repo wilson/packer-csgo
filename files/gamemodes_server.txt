@@ -1,0 +1,38 @@
+"Gamemodes_Server.txt"
+{
+    "gameTypes"
+    {
+        "classic"
+        {
+            "gameModes"
+            {
+                "competitive"
+                {
+                    "maxplayers" "20"
+                    "mapgroupsMP"
+                    {
+                        "mg_custom"
+                    }
+                }
+            }
+        }
+    }
+    "mapgroups"
+    {
+        "mg_custom"
+        {
+            "name" "mg_custom"
+            "maps"
+            {
+                "cs_office" ""
+                "de_cbble" ""
+                "de_dust2" ""
+                "de_inferno" ""
+                "de_shortdust" ""
+                "de_shortnuke" ""
+                "de_train" ""
+                "gd_rialto" ""
+            }
+        }
+    }
+}
