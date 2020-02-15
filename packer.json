@@ -86,6 +86,11 @@
     },
     {
       "type": "file",
+      "source": "./files/addons",
+      "destination": "/tmp/"
+    },
+    {
+      "type": "file",
       "source": "./files/gamemodes_server.txt",
       "destination": "/tmp/"
     },
@@ -94,6 +99,8 @@
       "inline": [
         "sudo mv /tmp/cfg/* /steam/csgo-dedicated/csgo/cfg/",
         "sudo chown steam /steam/csgo-dedicated/csgo/cfg/*",
+        "sudo mv /tmp/addons /steam/csgo-dedicated/csgo/",
+        "sudo chown -R steam /steam/csgo-dedicated/csgo/addons/*",
         "sudo mv /tmp/gamemodes_server.txt /steam/csgo-dedicated/csgo/",
         "sudo chown steam /steam/csgo-dedicated/csgo/gamemodes_server.txt"
       ]
