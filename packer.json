@@ -1,6 +1,7 @@
 {
   "variables": {
     "steam_token": "{{env `STEAM_TOKEN`}}",
+    "steam_authkey": "{{env `STEAM_AUTHKEY`}}",
     "rcon_password": "{{env `RCON_PASSWORD`}}",
     "subnet_name": "public-2a",
     "instance_type": "c5.large",
@@ -69,6 +70,7 @@
       "type": "shell",
       "environment_vars": [
         "STEAM_TOKEN={{user `steam_token`}}",
+        "STEAM_AUTHKEY={{user `steam_authkey`}}",
         "RCON_PASSWORD={{user `rcon_password`}}"
       ],
       "inline": [
