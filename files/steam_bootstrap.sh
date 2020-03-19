@@ -6,9 +6,21 @@ if [ -z "${STEAM_TOKEN}" ]; then
   exit 1
 fi
 
+if [ -z "${STEAM_AUTHKEY}" ]; then
+  >&2 echo "Please set the STEAM_AUTHKEY environment variable."
+  exit 1
+fi
+
 if [ -z "${RCON_PASSWORD}" ]; then
   >&2 echo "Please set the RCON_PASSWORD environment variable."
   exit 1
+fi
+
+if [ -z "${SV_PASSWORD}" ]; then
+  >&2 echo "Continuing without a server password."
+  SV_PASSWORD_ARG=
+else
+  SV_PASSWORD_ARG="echo '    +sv_password \"${SV_PASSWORD}\" \\';"
 fi
 
 su steam -c \
@@ -38,6 +50,7 @@ su steam -c "{ \
      echo '    -usercon +fps_max 300 -tickrate 128 -port 27015 -tv_port 27020 -net_port_try 1 \\';
      echo '    -maxplayers_override 20 +game_type 0 +game_mode 2 +mapgroup custom \\';
      echo '    -authkey ${STEAM_AUTHKEY} \\';
+     ${SV_PASSWORD_ARG}
      echo '    +hostname \"CS:GO 2v2\" +exec scrim16 +sv_region 0 \\';
      echo '    +sv_setsteamaccount ${STEAM_TOKEN} +rcon_password ${RCON_PASSWORD} \\';
      echo '    +map de_safehouse';
